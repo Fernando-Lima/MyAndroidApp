@@ -1,19 +1,39 @@
 package com.example.fernando.myapplication;
 
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.fernando.myapplication.adapter.SectionsPagerAdapter;
+
+public class MainActivity extends DebugActivity {
     FloatingActionButton fab;
+
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+      setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        viewPager = (ViewPager)findViewById(R.id.container);
+        viewPager.setAdapter(mSectionsPagerAdapter);
+
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+
         fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -21,15 +41,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        // Chamando um fragment dinamicamente
-       if (savedInstanceState == null){
-           FragmentManager fm = getSupportFragmentManager();
-           FragmentTransaction ft = fm.beginTransaction();
-           Fragment1 frag1 = new Fragment1();
-           ft.add(R.id.layoutFrag, frag1, "Fragment1");
-           ft.commit();
-       }
-
-
     }
 }
