@@ -14,12 +14,6 @@ public class DebugActivity extends AppCompatActivity {
     protected static final String TAG = "ciclo";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i(TAG,getLocalClassName()+".onCreate");
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         Log.i(TAG,getLocalClassName()+".onSaveInstanceState");

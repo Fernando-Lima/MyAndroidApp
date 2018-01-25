@@ -1,11 +1,13 @@
 package com.example.fernando.myapplication;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.example.fernando.myapplication.adapter.SectionsPagerAdapter;
@@ -19,7 +21,8 @@ public class MainActivity extends DebugActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_main);
+        Log.i(TAG,getLocalClassName()+".onCreate");
+        setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,7 +41,8 @@ public class MainActivity extends DebugActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent it = new Intent(MainActivity.this,CadServicoActivity.class);
+                startActivity(it);
             }
         });
     }

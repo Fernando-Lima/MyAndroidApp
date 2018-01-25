@@ -10,7 +10,7 @@ import android.widget.EditText;
 import com.example.fernando.myapplication.DAO.ServicoDAO;
 import com.example.fernando.myapplication.Model.Servico;
 
-public class Cad_servicoActivity extends DebugActivity {
+public class CadServicoActivity extends DebugActivity {
     public Button btnSalvar;
     public EditText edtNome;
     ServicoDAO servicoDAO;

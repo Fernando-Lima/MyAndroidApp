@@ -22,7 +22,7 @@
                 android:name=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".HellowActivity" />
-        <activity android:name=".Cad_servicoActivity"></activity>
+        <activity android:name=".CadServicoActivity"></activity>
     </application>
 
 </manifest>
