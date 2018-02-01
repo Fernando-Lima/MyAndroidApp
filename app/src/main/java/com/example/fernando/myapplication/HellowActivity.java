@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.fernando.myapplication.DAO.ServicoDAO;
 import com.example.fernando.myapplication.DAO.UsuarioDAO;
+import com.example.fernando.myapplication.Model.Servico;
 import com.example.fernando.myapplication.Model.Usuario;
 
 public class HellowActivity extends DebugActivity {
@@ -55,4 +57,5 @@ public class HellowActivity extends DebugActivity {
         usuario.setTelefone(edtNomeUsuario.getText().toString());
         dao.salvar(usuario);
     }
+
 }

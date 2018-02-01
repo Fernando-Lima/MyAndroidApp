@@ -30,10 +30,11 @@ public class SplashScreenActivity extends DebugActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    Log.i("usuario","não existe um usuário");
                     showHellow();
                 }
             },1000);
-            Log.i("usuario","não existe um usuário");
+
         }
     }
     public void showHellow(){

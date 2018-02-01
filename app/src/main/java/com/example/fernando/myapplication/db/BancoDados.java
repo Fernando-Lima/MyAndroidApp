@@ -17,7 +17,8 @@ public class BancoDados {
     private static final String[] SCRIPT_DATABASE_CREATE_USUARIO = new String[] {"create table "+NOME_BANCO_USUARIO+"(_id integer primary key, nome text, telefone text);"};
 
     private static final String[] SCRIPT_DATABASE_DELETE_SERVICO = new String[]{"DROP TABLE IF EXISTS"+ NOME_BANCO_SERVICO};
-    private static final String[] SCRIPT_DATABASE_CREATE_SERVICO = new String[] {"create table "+NOME_BANCO_SERVICO+"(_id integer primary key, nome text);"};
+    private static final String[] SCRIPT_DATABASE_CREATE_SERVICO = new String[] {"create table "+NOME_BANCO_SERVICO+"(_id integer primary key, nome text, categoria text, descricao text);"};
+
 
     private static SQLiteDatabase dbUsuario;
     private static SQLiteDatabase dbServico;
