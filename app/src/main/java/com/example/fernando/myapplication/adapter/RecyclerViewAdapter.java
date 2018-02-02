@@ -1,11 +1,15 @@
 package com.example.fernando.myapplication.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.fernando.myapplication.CadGrupoActivity;
+import com.example.fernando.myapplication.CadServicoActivity;
 import com.example.fernando.myapplication.Model.Servico;
 import com.example.fernando.myapplication.R;
 
@@ -17,10 +21,13 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolderServico> {
     private List<Servico> servicos;
+    private Context context;
 
-    public RecyclerViewAdapter (List<Servico> servicos){
+    public RecyclerViewAdapter (List<Servico> servicos, Context context){
         this.servicos = servicos;
+        this.context = context;
     }
+
     @Override
     public RecyclerViewAdapter.ViewHolderServico onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());                                    // referência de uma classe layout inflater
@@ -33,10 +40,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolderServico holder, int position) {
 
         if((servicos != null && servicos.size()>0)){
+            final ViewHolderServico holderServico = (ViewHolderServico) holder;
             Servico servico = servicos.get(position);
             holder.tvNome.setText(servico.getNome());
             holder.tvDescricao.setText(servico.getDescricao());
             holder.tvCategoria.setText(servico.getCategoria());
+
+            holderServico.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it  = new Intent(context, CadGrupoActivity.class);
+                    context.startActivity(it);
+                }
+            });
         }
     }
 
@@ -50,9 +66,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public TextView tvNome;
         public TextView tvDescricao;
         public TextView tvCategoria;
+        private View mView;
 
         public ViewHolderServico(View itemView) {
             super(itemView);
+            mView = itemView;
 
             tvNome = (TextView)itemView.findViewById(R.id.list_item_servico_tv_nome);
             tvDescricao = (TextView)itemView.findViewById(R.id.list_item_servico_tv_descricao);

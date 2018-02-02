@@ -19,11 +19,15 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".MainActivity"
-                android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".HellowActivity" />
-        <activity android:name=".CadServicoActivity"
-            android:label="@string/cad_servico_name"></activity>
+        <activity
+            android:name=".CadServicoActivity"
+            android:label="@string/cad_servico_name" />
+        <activity
+            android:name=".CadGrupoActivity"
+            android:label="@string/title_activity_cad_grupo"></activity>
     </application>
 
 </manifest>

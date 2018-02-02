@@ -5,4 +5,8 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Usuários</string>
     <string name="tab_text_3">Tab 3</string>
+    <string name="title_activity_cad_grupo">CadGrupoActivity</string>
+    <string name="title_user">Usuários</string>
+    <string name="title_config">Configurções</string>
+    <string name="title_regra">Regras</string>
 </resources>
