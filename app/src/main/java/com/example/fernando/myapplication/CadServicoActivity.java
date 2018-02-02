@@ -32,7 +32,7 @@ public class CadServicoActivity extends DebugActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         lstDados.setLayoutManager(linearLayoutManager);
         List<Servico> servicos = servicoDAO.listar();
-        viewAdapter = new RecyclerViewAdapter(servicos);
+        viewAdapter = new RecyclerViewAdapter(servicos,this);
         lstDados.setAdapter(viewAdapter);
     }
 
