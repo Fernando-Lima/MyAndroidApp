@@ -27,7 +27,7 @@ public class CadServicoActivity extends DebugActivity {
         setContentView(R.layout.activity_cad_servico);
 
         servicoDAO = new ServicoDAO(this);
-        salvar();
+       // salvar();
         lstDados = (RecyclerView)findViewById(R.id.acs_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         lstDados.setLayoutManager(linearLayoutManager);

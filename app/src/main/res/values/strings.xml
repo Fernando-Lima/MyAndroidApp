@@ -9,4 +9,7 @@
     <string name="title_user">Usuários</string>
     <string name="title_config">Configurções</string>
     <string name="title_regra">Regras</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

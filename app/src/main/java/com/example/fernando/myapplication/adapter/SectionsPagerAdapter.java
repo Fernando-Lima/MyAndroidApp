@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.fernando.myapplication.fragment.FragmentMainAdapter;
+
 /**
  * Created by Fernando on 21/01/2018.
  */

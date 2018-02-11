@@ -1,4 +1,4 @@
-package com.example.fernando.myapplication.adapter;
+package com.example.fernando.myapplication.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,15 +1,19 @@
 package com.example.fernando.myapplication;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,16 @@ public class CadGrupoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_grupo);
+        Intent it = getIntent();
+        if(!it.getStringExtra("id").equals("")){
+            //abre o dialog cad grupo
+            showDialog();
+
+            Toast toast =Toast.makeText(this,"codigo = "+ it.getStringExtra("id"), Toast.LENGTH_SHORT);
+            toast.show();
+        }else{
+
+        }
 
         initView();
     }
@@ -41,7 +55,6 @@ public class CadGrupoActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager_bottom_navigation);
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(pageChangeListener);
-
 
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -94,6 +107,28 @@ public class CadGrupoActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    private void showDialog(){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(CadGrupoActivity.this);
+        View v = getLayoutInflater().inflate(R.layout.cad_grupo_dialog,null);
+
+        mBuilder.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        mBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent it = new Intent(CadGrupoActivity.this, MainActivity.class);
+                startActivity(it);
+            }
+        });
+        mBuilder.setView(v);
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
+    }
 
     private PagerAdapter pagerAdapter = new PagerAdapter() {
         @Override

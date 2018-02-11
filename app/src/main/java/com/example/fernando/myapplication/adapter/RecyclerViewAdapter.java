@@ -37,11 +37,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewAdapter.ViewHolderServico holder, int position) {
+    public void onBindViewHolder(final RecyclerViewAdapter.ViewHolderServico holder, int position) {
 
         if((servicos != null && servicos.size()>0)){
             final ViewHolderServico holderServico = (ViewHolderServico) holder;
-            Servico servico = servicos.get(position);
+            final Servico servico = servicos.get(position);
             holder.tvNome.setText(servico.getNome());
             holder.tvDescricao.setText(servico.getDescricao());
             holder.tvCategoria.setText(servico.getCategoria());
@@ -49,7 +49,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             holderServico.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String codigo = String.valueOf(servico.getId());
                     Intent it  = new Intent(context, CadGrupoActivity.class);
+                    it.putExtra("id",codigo);
                     context.startActivity(it);
                 }
             });
