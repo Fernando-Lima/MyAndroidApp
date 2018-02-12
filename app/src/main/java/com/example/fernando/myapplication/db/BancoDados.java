@@ -12,16 +12,26 @@ import android.util.Log;
 public class BancoDados {
     private static final String NOME_BANCO_USUARIO = "tbl_usuario";
     private static final String NOME_BANCO_SERVICO = "tbl_servico";
+    private static final String NOME_BANCO_CATEGORIA = "tbl_categoria";
+    private static final String NOME_BANCO_GRUPO = "tbl_grupo";
     private static final int VERSAO_BANCO = 4;
     private static final String[] SCRIPT_DATABASE_DELETE_USUARIO = new String[]{"DROP TABLE IF EXISTS"+ NOME_BANCO_USUARIO};
     private static final String[] SCRIPT_DATABASE_CREATE_USUARIO = new String[] {"create table "+NOME_BANCO_USUARIO+"(_id integer primary key, nome text, telefone text);"};
 
     private static final String[] SCRIPT_DATABASE_DELETE_SERVICO = new String[]{"DROP TABLE IF EXISTS"+ NOME_BANCO_SERVICO};
-    private static final String[] SCRIPT_DATABASE_CREATE_SERVICO = new String[] {"create table "+NOME_BANCO_SERVICO+"(_id integer primary key, nome text, categoria text, descricao text);"};
+    private static final String[] SCRIPT_DATABASE_CREATE_SERVICO = new String[] {"create table "+NOME_BANCO_SERVICO+"(_id integer primary key, nome text, descricao text);"};
 
+    private static final String[] SCRIPT_DATABASE_DELETE_CATEGORIA = new String[]{"DROP TABLE IF EXISTS"+ NOME_BANCO_CATEGORIA};
+    private static final String[] SCRIPT_DATABASE_CREATE_CATEGORIA = new String[] {"create table "+NOME_BANCO_CATEGORIA+"(_id integer primary key, nome text, descricao text);"};
+
+    private static final String[] SCRIPT_DATABASE_DELETE_GRUPO = new String[]{"DROP TABLE IF EXISTS"+ NOME_BANCO_GRUPO};
+    private static final String[] SCRIPT_DATABASE_CREATE_GRUPO = new String[] {"create table "+NOME_BANCO_GRUPO+"(_id integer primary key, nome text, " +
+            "idCategoria integer not null, foreing key(idCategoria) references "+NOME_BANCO_CATEGORIA+"(id) ;"};
 
     private static SQLiteDatabase dbUsuario;
     private static SQLiteDatabase dbServico;
+    private static SQLiteDatabase dbCategoria;
+    private static SQLiteDatabase dbGrupo;
 
     // Injeta os parâmetros no construtor do SQLiteHelper passando contexto, nome, versão, Script create, Script Delete
     public static SQLiteDatabase getDbUsuario(Context ctx) {
@@ -37,6 +47,7 @@ public class BancoDados {
 
         return dbUsuario;
     }
+
     public static SQLiteDatabase getDbServico(Context ctx){
         try {
             if (dbServico == null) {
@@ -48,5 +59,31 @@ public class BancoDados {
             Log.i("banco","Erro ao criar o Banco de Dados Servico");
         }
         return dbServico;
+    }
+
+    public static SQLiteDatabase getDBCategoria(Context ctx){
+        try {
+            if(dbCategoria == null) {
+                SQLiteHelper dbHelper = new SQLiteHelper(ctx, NOME_BANCO_CATEGORIA, VERSAO_BANCO, SCRIPT_DATABASE_CREATE_CATEGORIA, SCRIPT_DATABASE_DELETE_CATEGORIA);
+                dbCategoria = dbHelper.getWritableDatabase();
+                Log.i("banco","bancoDados Categoria banco criado com sucesso");
+            }
+        }catch (SQLException ex){
+            Log.i("banco","Erro ao criar o Banco de Dados Categoria");
+        }
+         return dbCategoria;
+    }
+
+    public static SQLiteDatabase getDBGrupo(Context ctx){
+        try {
+            if(dbGrupo == null) {
+                SQLiteHelper dbHelper = new SQLiteHelper(ctx, NOME_BANCO_GRUPO, VERSAO_BANCO, SCRIPT_DATABASE_CREATE_GRUPO, SCRIPT_DATABASE_DELETE_GRUPO);
+                dbGrupo = dbHelper.getWritableDatabase();
+                Log.i("banco","bancoDados Grupo banco criado com sucesso");
+            }
+        }catch (SQLException ex){
+            Log.i("banco","Erro ao criar o Banco de Dados Grupo");
+        }
+        return dbGrupo;
     }
 }
