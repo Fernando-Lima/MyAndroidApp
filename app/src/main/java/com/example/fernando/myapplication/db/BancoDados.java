@@ -19,14 +19,15 @@ public class BancoDados {
     private static final String[] SCRIPT_DATABASE_CREATE_USUARIO = new String[] {"create table "+NOME_BANCO_USUARIO+"(_id integer primary key, nome text, telefone text);"};
 
     private static final String[] SCRIPT_DATABASE_DELETE_SERVICO = new String[]{"DROP TABLE IF EXISTS"+ NOME_BANCO_SERVICO};
-    private static final String[] SCRIPT_DATABASE_CREATE_SERVICO = new String[] {"create table "+NOME_BANCO_SERVICO+"(_id integer primary key, nome text, descricao text);"};
+    private static final String[] SCRIPT_DATABASE_CREATE_SERVICO = new String[] {"create table "+NOME_BANCO_SERVICO+"(_id integer primary key, nome text, descricao text, " +
+            "idCategoria integer not null, foreing key(idCategoria) references "+NOME_BANCO_CATEGORIA+"(id));"};
 
     private static final String[] SCRIPT_DATABASE_DELETE_CATEGORIA = new String[]{"DROP TABLE IF EXISTS"+ NOME_BANCO_CATEGORIA};
     private static final String[] SCRIPT_DATABASE_CREATE_CATEGORIA = new String[] {"create table "+NOME_BANCO_CATEGORIA+"(_id integer primary key, nome text, descricao text);"};
 
     private static final String[] SCRIPT_DATABASE_DELETE_GRUPO = new String[]{"DROP TABLE IF EXISTS"+ NOME_BANCO_GRUPO};
-    private static final String[] SCRIPT_DATABASE_CREATE_GRUPO = new String[] {"create table "+NOME_BANCO_GRUPO+"(_id integer primary key, nome text, " +
-            "idCategoria integer not null, foreing key(idCategoria) references "+NOME_BANCO_CATEGORIA+"(id) ;"};
+    private static final String[] SCRIPT_DATABASE_CREATE_GRUPO = new String[] {"create table "+NOME_BANCO_GRUPO+"(_id integer primary key, nome text," +
+            "id_servico integer not null, foreing key(id_servico) references "+NOME_BANCO_SERVICO+" (id));"};
 
     private static SQLiteDatabase dbUsuario;
     private static SQLiteDatabase dbServico;
