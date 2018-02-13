@@ -43,4 +43,5 @@ public class CadServicoActivity extends DebugActivity {
         servico.setCategoria("Vídeo");
         servicoDAO.salvar(servico);
     }
+
 }

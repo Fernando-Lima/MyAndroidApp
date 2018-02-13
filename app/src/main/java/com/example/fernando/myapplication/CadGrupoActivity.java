@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CadGrupoActivity extends AppCompatActivity {
+public class CadGrupoActivity extends DebugActivity {
 
     private BottomNavigationView navigation;
     private ViewPager viewPager;
@@ -121,8 +121,7 @@ public class CadGrupoActivity extends AppCompatActivity {
         mBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent it = new Intent(CadGrupoActivity.this, MainActivity.class);
-                startActivity(it);
+               finish();
             }
         });
         mBuilder.setView(v);
