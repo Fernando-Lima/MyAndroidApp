@@ -7,8 +7,8 @@ package com.example.fernando.myapplication.Model;
 public class Servico {
     private Long id;
     private String nome;
-    private String categoria;
     private String descricao;
+    private Long IdCategoria;
 
     public Long getId() {
         return id;
@@ -26,14 +26,6 @@ public class Servico {
         this.nome = nome;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
     public String getDescricao() {
         return descricao;
     }
@@ -42,5 +34,11 @@ public class Servico {
         this.descricao = descricao;
     }
 
+    public Long getIdCategoria() {
+        return IdCategoria;
+    }
 
+    public void setIdCategoria(Long IdCategoria) {
+        this.IdCategoria = IdCategoria;
+    }
 }

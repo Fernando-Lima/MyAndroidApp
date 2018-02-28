@@ -27,31 +27,23 @@ public class ServicoDAO {
     public void salvar(Servico servico) {
         ContentValues values = new ContentValues();
         values.put("nome", servico.getNome());
-        values.put("categoria", servico.getCategoria());
+        values.put("id_categoria", servico.getIdCategoria());
         values.put("descricao", servico.getDescricao());
         dbServico.insert("tbl_servico", null, values);
     }
 
-    public void excluir() {
-
-    }
-
-    public Servico buscarTudoServico() {
-        Servico servico = new Servico();
-        return servico;
-    }
     public List<Servico>listar(){
-        String[] colunas = new String[]{"_id", "nome","categoria","descricao"};
+        String[] colunas = new String[]{"_id_servico", "nome","descricao", "id_categoria"};
         List<Servico> servicos;
         Cursor c = dbServico.query("tbl_servico", colunas, null,null,null,null,null);
         servicos = new ArrayList<Servico>();
         if(c.moveToFirst()){
             do {
                 Servico servico = new Servico();
-                servico.setId(c.getLong(c.getColumnIndex("_id")));
+                servico.setId(c.getLong(c.getColumnIndex("_id_servico")));
                 servico.setNome(c.getString(c.getColumnIndex("nome")));
-                servico.setCategoria(c.getString(c.getColumnIndex("categoria")));
                 servico.setDescricao(c.getString(c.getColumnIndex("descricao")));
+                servico.setIdCategoria(c.getLong(c.getColumnIndex("id_categoria")));
 
                 servicos.add(servico);
             }while (c.moveToNext());
