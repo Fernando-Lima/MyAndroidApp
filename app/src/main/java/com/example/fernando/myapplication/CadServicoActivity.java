@@ -20,14 +20,12 @@ public class CadServicoActivity extends DebugActivity {
     private ServicoDAO servicoDAO;
     private RecyclerViewAdapter viewAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_servico);
-
         servicoDAO = new ServicoDAO(this);
-       // salvar();
+
         lstDados = (RecyclerView)findViewById(R.id.acs_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         lstDados.setLayoutManager(linearLayoutManager);
@@ -35,13 +33,4 @@ public class CadServicoActivity extends DebugActivity {
         viewAdapter = new RecyclerViewAdapter(servicos,this);
         lstDados.setAdapter(viewAdapter);
     }
-
-    public void salvar(){
-        Servico servico = new Servico();
-        servico.setNome("NETFLIX");
-        servico.setDescricao("Netflix vip");
-        servico.setCategoria("Vídeo");
-        servicoDAO.salvar(servico);
-    }
-
 }

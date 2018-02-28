@@ -7,8 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.fernando.myapplication.DAO.CategoriaDAO;
+import com.example.fernando.myapplication.DAO.GrupoDAO;
 import com.example.fernando.myapplication.DAO.ServicoDAO;
 import com.example.fernando.myapplication.DAO.UsuarioDAO;
+import com.example.fernando.myapplication.Model.Categoria;
 import com.example.fernando.myapplication.Model.Servico;
 import com.example.fernando.myapplication.Model.Usuario;
 
@@ -17,7 +20,9 @@ public class HellowActivity extends DebugActivity {
     private Button btnSalvar;
     private Button btnIniciar;
 
-    UsuarioDAO dao;
+    private UsuarioDAO usuarioDAO;
+    private CategoriaDAO categoriaDAO;
+    private ServicoDAO servicoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,10 @@ public class HellowActivity extends DebugActivity {
         setContentView(R.layout.activity_hellow);
         getSupportActionBar().hide(); // Esconde a Action Bar
 
-        dao = new UsuarioDAO(this);
+        usuarioDAO = new UsuarioDAO(this);
+        categoriaDAO = new CategoriaDAO(this);
+        servicoDAO = new ServicoDAO(this);
+
         edtNomeUsuario = (EditText)findViewById(R.id.hellow_edt_name);
         edtTelefoneUsuario = (EditText)findViewById(R.id.hellow_edt_telefone);
         btnIniciar =(Button)findViewById(R.id.btn_iniciar);
@@ -42,7 +50,7 @@ public class HellowActivity extends DebugActivity {
                         Log.i("banco", "Usuario "+ edtNomeUsuario.getText().toString()+" salvo com sucesso");
                     }catch (Exception e){
                         e.printStackTrace();
-                        Log.e("banco", "Erro"+e);
+                        Log.e("banco", "Erro ao salvar USUARIO"+e);
                     }
                     startActivity(new Intent(HellowActivity.this,MainActivity.class));
                     finish();
@@ -55,7 +63,6 @@ public class HellowActivity extends DebugActivity {
         Usuario usuario = new Usuario();
         usuario.setNome(edtNomeUsuario.getText().toString());
         usuario.setTelefone(edtNomeUsuario.getText().toString());
-        dao.salvar(usuario);
+        usuarioDAO.salvar(usuario);
     }
-
 }

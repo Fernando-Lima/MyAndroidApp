@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.example.fernando.myapplication.DAO.ServicoDAO;
+import com.example.fernando.myapplication.Model.Servico;
 import com.example.fernando.myapplication.adapter.SectionsPagerAdapter;
 
 public class MainActivity extends DebugActivity {
@@ -17,12 +19,14 @@ public class MainActivity extends DebugActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager viewPager;
+    private ServicoDAO servicoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG,getLocalClassName()+".onCreate");
         setContentView(R.layout.activity_main);
+        servicoDAO = new ServicoDAO(this);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
