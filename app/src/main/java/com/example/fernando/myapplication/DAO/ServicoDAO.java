@@ -52,4 +52,25 @@ public class ServicoDAO {
         c.close();
         return servicos;
     }
+    public List<Servico>listar(){
+        List<Servico> servicos;
+        Cursor c = dbServico.rawQuery("select s.nome , s.descricao, c.nome\n" +
+                "from tbl_categoria c join tbl_servico s\n" +
+                "on c._id_categoria = s.id_categoria \n" +
+                "order by c.nome;",null);
+        servicos = new ArrayList<Servico>();
+        if(c.moveToFirst()){
+            do {
+                Servico servico = new Servico();
+                servico.setId(c.getLong(c.getColumnIndex("_id_servico")));
+                servico.setNome(c.getString(c.getColumnIndex("nome")));
+                servico.setDescricao(c.getString(c.getColumnIndex("descricao")));
+                servico.setIdCategoria(c.getLong(c.getColumnIndex("id_categoria")));
+
+                servicos.add(servico);
+            }while (c.moveToNext());
+        }
+        c.close();
+        return servicos;
+    }
 }

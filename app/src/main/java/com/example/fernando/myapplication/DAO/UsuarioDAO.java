@@ -28,10 +28,18 @@ public class UsuarioDAO {
     public void excluir(){
 
     }
-    public Usuario buscarTudoUsuario(){
-        String[] colunas = new String[]{"_id", "nome","telefone"};
-        Cursor cursor = dbUsuario.query("tbl_usuario",colunas,"cod = 1",null,null,null,null);
+    public Usuario buscarTudoUsuario(int codigo){
         Usuario usuario =  new Usuario();
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT * FROM tbl_usuario");
+        sql.append("WHERE _ic = ?");
+
+        String[] parametros = new String[1];
+        parametros[0] = String.valueOf(usuario.getId());
+
+        String[] colunas = new String[]{"_id", "nome","telefone"};
+        Cursor cursor = dbUsuario.rawQuery(sql.toString(),null);
 
         if(cursor.moveToFirst()){
             do {
