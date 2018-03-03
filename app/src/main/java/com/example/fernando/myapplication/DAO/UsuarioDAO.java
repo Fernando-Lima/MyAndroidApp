@@ -36,7 +36,7 @@ public class UsuarioDAO {
         sql.append("WHERE _ic = ?");
 
         String[] parametros = new String[1];
-        parametros[0] = String.valueOf(usuario.getId());
+        parametros[0] = String.valueOf(codigo);
 
         String[] colunas = new String[]{"_id", "nome","telefone"};
         Cursor cursor = dbUsuario.rawQuery(sql.toString(),null);
