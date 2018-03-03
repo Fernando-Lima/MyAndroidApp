@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.fernando.myapplication.Model.Categoria;
 import com.example.fernando.myapplication.Model.Servico;
 import com.example.fernando.myapplication.db.BancoDados;
 
@@ -32,7 +33,7 @@ public class ServicoDAO {
         dbServico.insert("tbl_servico", null, values);
     }
 
-    public List<Servico>listar(){
+    public List<Servico>listars(){
         String[] colunas = new String[]{"_id_servico", "nome","descricao", "id_categoria"};
         List<Servico> servicos;
         Cursor c = dbServico.query("tbl_servico", colunas, null,null,null,null,null);

@@ -72,7 +72,7 @@ public class BancoDados {
         }catch (SQLException ex){
             Log.i("banco","Erro ao criar o Banco de Dados Categoria");
         }
-         return dbCategoria;
+        return dbCategoria;
     }
 
     public static SQLiteDatabase getDBGrupo(Context ctx){
