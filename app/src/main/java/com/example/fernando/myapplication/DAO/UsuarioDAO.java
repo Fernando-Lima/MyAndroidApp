@@ -33,7 +33,7 @@ public class UsuarioDAO {
 
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT * FROM tbl_usuario");
-        sql.append("WHERE _ic = ?");
+        sql.append("WHERE _id = ?");
 
         String[] parametros = new String[1];
         parametros[0] = String.valueOf(codigo);
