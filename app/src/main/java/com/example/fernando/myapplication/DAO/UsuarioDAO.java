@@ -17,7 +17,7 @@ public class UsuarioDAO {
     SQLiteDatabase dbUsuario; // reppresenta a conexão com o banco de dados.
 
     public UsuarioDAO(Context context){
-        dbUsuario = BancoDados.getDbUsuario(context);
+        dbUsuario = BancoDados.getDb(context);
     }
     public void salvar(Usuario usuario){
         ContentValues values = new ContentValues();

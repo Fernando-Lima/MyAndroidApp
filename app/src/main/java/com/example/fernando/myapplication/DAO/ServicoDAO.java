@@ -22,50 +22,34 @@ public class ServicoDAO {
     SQLiteDatabase dbServico;
 
     public ServicoDAO(Context context) {
-        dbServico = BancoDados.getDbServico(context);
+        dbServico = BancoDados.getDb(context);
     }
 
     public void salvar(Servico servico) {
         ContentValues values = new ContentValues();
         values.put("nome", servico.getNome());
-        values.put("id_categoria", servico.getIdCategoria());
+        values.put("id_categoria", servico.getCategoria().getId());
         values.put("descricao", servico.getDescricao());
         dbServico.insert("tbl_servico", null, values);
     }
-
-    public List<Servico>listars(){
-        String[] colunas = new String[]{"_id_servico", "nome","descricao", "id_categoria"};
-        List<Servico> servicos;
-        Cursor c = dbServico.query("tbl_servico", colunas, null,null,null,null,null);
-        servicos = new ArrayList<Servico>();
-        if(c.moveToFirst()){
-            do {
-                Servico servico = new Servico();
-                servico.setId(c.getLong(c.getColumnIndex("_id_servico")));
-                servico.setNome(c.getString(c.getColumnIndex("nome")));
-                servico.setDescricao(c.getString(c.getColumnIndex("descricao")));
-                servico.setIdCategoria(c.getLong(c.getColumnIndex("id_categoria")));
-
-                servicos.add(servico);
-            }while (c.moveToNext());
-        }
-        c.close();
-        return servicos;
-    }
     public List<Servico>listar(){
         List<Servico> servicos;
-        Cursor c = dbServico.rawQuery("select s.nome , s.descricao, c.nome\n" +
+        Cursor c = dbServico.rawQuery("select s._id_servico, s.nome , s.descricao,_id_categoria as idCategoria, c.nome as nomeCategoria\n" +
                 "from tbl_categoria c join tbl_servico s\n" +
                 "on c._id_categoria = s.id_categoria \n" +
-                "order by c.nome;",null);
+                "order by s.nome;",null);
         servicos = new ArrayList<Servico>();
         if(c.moveToFirst()){
             do {
+
+                Categoria categoria = new Categoria();
+                categoria.setId(c.getLong(c.getColumnIndex("idCategoria")));
+                categoria.setNome(c.getString(c.getColumnIndex("nomeCategoria")));
                 Servico servico = new Servico();
                 servico.setId(c.getLong(c.getColumnIndex("_id_servico")));
                 servico.setNome(c.getString(c.getColumnIndex("nome")));
                 servico.setDescricao(c.getString(c.getColumnIndex("descricao")));
-                servico.setIdCategoria(c.getLong(c.getColumnIndex("id_categoria")));
+                servico.setCategoria(categoria);
 
                 servicos.add(servico);
             }while (c.moveToNext());
@@ -73,4 +57,5 @@ public class ServicoDAO {
         c.close();
         return servicos;
     }
+
 }

@@ -8,7 +8,7 @@ public class Servico {
     private Long id;
     private String nome;
     private String descricao;
-    private Long IdCategoria;
+    private Categoria categoria;
 
     public Long getId() {
         return id;
@@ -34,11 +34,11 @@ public class Servico {
         this.descricao = descricao;
     }
 
-    public Long getIdCategoria() {
-        return IdCategoria;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setIdCategoria(Long IdCategoria) {
-        this.IdCategoria = IdCategoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

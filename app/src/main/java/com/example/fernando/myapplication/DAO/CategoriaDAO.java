@@ -17,7 +17,7 @@ public class CategoriaDAO {
     SQLiteDatabase dbCategoria;
 
     public CategoriaDAO (Context context){
-        dbCategoria = BancoDados.getDBCategoria(context);
+        dbCategoria = BancoDados.getDb(context);
     }
 
     public void salvar(Categoria categoria){

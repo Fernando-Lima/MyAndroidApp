@@ -24,6 +24,7 @@ public class HellowActivity extends DebugActivity {
     private CategoriaDAO categoriaDAO;
     private ServicoDAO servicoDAO;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +59,33 @@ public class HellowActivity extends DebugActivity {
 
             }
         });
+        try{
+            //salvarCategoria();
+            salvarServico();
+            Log.i("banco", "servico salvo com sucesso");
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("banco", "Erro ao salvar categoria"+e);
+        }
     }
     public void salvarUsuario(){
         Usuario usuario = new Usuario();
         usuario.setNome(edtNomeUsuario.getText().toString());
         usuario.setTelefone(edtNomeUsuario.getText().toString());
         usuarioDAO.salvar(usuario);
+    }
+    public void salvarCategoria(){
+        Categoria categoria = new Categoria();
+        categoria.setNome("Leitura");
+        categoriaDAO.salvar(categoria);
+    }
+    public void salvarServico(){
+        Categoria categoria = new Categoria();
+        categoria.setId((long)3);
+        Servico servico = new Servico();
+        servico.setNome("Alura");
+        servico.setDescricao("curso de programação");
+        servico.setCategoria(categoria);
+        servicoDAO.salvar(servico);
     }
 }

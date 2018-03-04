@@ -44,7 +44,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             final Servico servico = servicos.get(position);
             holder.tvNome.setText(servico.getNome());
             holder.tvDescricao.setText(servico.getDescricao());
-            holder.tvCategoria.setText(servico.getIdCategoria().toString());
+            holder.tvCategoria.setText(servico.getCategoria().getNome());
 
             holderServico.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
