@@ -44,7 +44,7 @@ public class SplashScreenActivity extends DebugActivity {
         }
         try{
             //salvarCategoria();
-            salvarServico();
+            //salvarServico();
             Log.i("banco", "servico salvo com sucesso");
         }catch (Exception e){
             e.printStackTrace();
