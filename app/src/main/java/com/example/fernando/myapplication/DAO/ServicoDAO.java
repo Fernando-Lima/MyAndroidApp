@@ -58,4 +58,22 @@ public class ServicoDAO {
         return servicos;
     }
 
+    public void alterar(Servico servico){
+        ContentValues values = new ContentValues();
+        values.put("nome", servico.getNome());
+        values.put("id_categoria", servico.getCategoria().getId());
+        values.put("descricao", servico.getDescricao());
+        String[] parametros = new String[1];
+        parametros[0] = String.valueOf(servico.getId());
+
+        dbServico.update("tbl_servico",values,"_id = ?",parametros);
+    }
+
+    public void excluir(int codigo){
+        String[] parametros = new String[1];
+        parametros[0] = String.valueOf(codigo);
+
+        dbServico.delete("tbl_servido","_id = ?", parametros);
+    }
+
 }

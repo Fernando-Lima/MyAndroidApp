@@ -13,7 +13,6 @@ import com.example.fernando.myapplication.Model.Servico;
 
 public class SplashScreenActivity extends DebugActivity {
     UsuarioDAO dao;
-    ServicoDAO servicoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,6 @@ public class SplashScreenActivity extends DebugActivity {
         Handler handler = new Handler();
 
         dao = new UsuarioDAO(this);
-        servicoDAO = new ServicoDAO(this);
         dao.checarTabela();
         if(dao.checarTabela() == true){
             handler.postDelayed(new Runnable() {
@@ -42,14 +40,6 @@ public class SplashScreenActivity extends DebugActivity {
             },1000);
 
         }
-        try{
-            //salvarCategoria();
-            //salvarServico();
-            Log.i("banco", "servico salvo com sucesso");
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.e("banco", "Erro ao salvar categoria"+e);
-        }
     }
     public void showHellow(){
         Intent intent =  new Intent(SplashScreenActivity.this,HellowActivity.class);
@@ -61,14 +51,4 @@ public class SplashScreenActivity extends DebugActivity {
         startActivity(intent);
         finish();
     }
-    public void salvarServico(){
-        Categoria categoria = new Categoria();
-        categoria.setId((long)3);
-        Servico servico = new Servico();
-        servico.setNome("Alura");
-        servico.setDescricao("curso de programação");
-        servico.setCategoria(categoria);
-        servicoDAO.salvar(servico);
-    }
-
 }

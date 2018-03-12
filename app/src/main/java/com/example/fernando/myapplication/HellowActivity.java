@@ -24,7 +24,6 @@ public class HellowActivity extends DebugActivity {
     private CategoriaDAO categoriaDAO;
     private ServicoDAO servicoDAO;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +60,7 @@ public class HellowActivity extends DebugActivity {
         });
         try{
             //salvarCategoria();
-            salvarServico();
+            //salvarServico();
             Log.i("banco", "servico salvo com sucesso");
         }catch (Exception e){
             e.printStackTrace();
@@ -81,10 +80,10 @@ public class HellowActivity extends DebugActivity {
     }
     public void salvarServico(){
         Categoria categoria = new Categoria();
-        categoria.setId((long)3);
+        categoria.setId((long)5);
         Servico servico = new Servico();
-        servico.setNome("Alura");
-        servico.setDescricao("curso de programação");
+        servico.setNome("Revista Abril");
+        servico.setDescricao("informação");
         servico.setCategoria(categoria);
         servicoDAO.salvar(servico);
     }
