@@ -13,8 +13,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.fernando.myapplication.DAO.CategoriaDAO;
+import com.example.fernando.myapplication.DAO.ServicoDAO;
+import com.example.fernando.myapplication.Model.Categoria;
+import com.example.fernando.myapplication.Model.Servico;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,23 +30,22 @@ public class CadGrupoActivity extends DebugActivity {
     private BottomNavigationView navigation;
     private ViewPager viewPager;
     private List<View> viewList;
+    private EditText edtDescricao;
+    private TextView tvTitulo;
+    ServicoDAO servicoDAO;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_cad_grupo);
+        servicoDAO = new ServicoDAO(this);
+
         Intent it = getIntent();
         if(!it.getStringExtra("id").equals("")){
-            //abre o dialog cad grupo
-            showDialog();
-
-            Toast toast =Toast.makeText(this,"codigo = "+ it.getStringExtra("id"), Toast.LENGTH_SHORT);
-            toast.show();
-        }else{
-
+            showDialog(it.getStringExtra("id"));
         }
-
         initView();
     }
 
@@ -110,14 +115,18 @@ public class CadGrupoActivity extends DebugActivity {
         }
     };
 
-    private void showDialog(){
+    private void showDialog(String codigo){
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(CadGrupoActivity.this);
         View v = getLayoutInflater().inflate(R.layout.cad_grupo_dialog,null);
+        tvTitulo = (TextView)v.findViewById(R.id.tv_dialog_titulo);
+        edtDescricao = (EditText)v.findViewById(R.id.edt_dialog_descricao);
+        buscarServico(codigo);
+
 
         mBuilder.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                //salvar o grupo
             }
         });
         mBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -129,9 +138,19 @@ public class CadGrupoActivity extends DebugActivity {
         mBuilder.setView(v);
         AlertDialog dialog = mBuilder.create();
         dialog.show();
+
     }
 
+    public void buscarServico(String codigo){
+        Servico servico = new Servico();
+        servico = servicoDAO.buscarServico(codigo);
+
+        tvTitulo.setText(servico.getNome());
+        edtDescricao.setText(servico.getDescricao());
+    }
     private PagerAdapter pagerAdapter = new PagerAdapter() {
+
+
         @Override
         public int getCount() {
             return viewList.size();

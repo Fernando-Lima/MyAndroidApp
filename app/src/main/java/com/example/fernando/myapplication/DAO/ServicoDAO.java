@@ -34,7 +34,7 @@ public class ServicoDAO {
     }
     public List<Servico>listar(){
         List<Servico> servicos;
-        Cursor c = dbServico.rawQuery("select s._id_servico, s.nome , s.descricao,_id_categoria as idCategoria, c.nome as nomeCategoria\n" +
+        Cursor c = dbServico.rawQuery("select s._id_servico, s.nome , s.descricao,c._id_categoria as idCategoria, c.nome as nomeCategoria\n" +
                 "from tbl_categoria c join tbl_servico s\n" +
                 "on c._id_categoria = s.id_categoria \n" +
                 "order by s.nome;",null);
@@ -74,6 +74,28 @@ public class ServicoDAO {
         parametros[0] = String.valueOf(codigo);
 
         dbServico.delete("tbl_servido","_id = ?", parametros);
+    }
+
+    public Servico buscarServico(String codigo){
+       // StringBuilder sql = new StringBuilder();
+       /* sql.append("SELECT s._id_servico, s.nome , s.descricao,_id_categoria AS idCategoria, c.nome AS nomeCategoria ");
+        sql.append("FROM tbl_categoria c join tbl_servico s");
+        sql.append("ON c._id_categoria = s.id_categoria");
+        sql.append("WHERE s._id_servico = ? ");
+        sql.append("ORDER BY s.nome");*/
+
+
+        String[] colunas = new String[]{"_id_servico","nome","descricao"};
+        String[] parametros = new String[]{codigo};
+
+        Cursor c = dbServico.query("tbl_servico",colunas,"_id_servico = ?",parametros,null,null,null);
+        c.moveToFirst();
+
+        Servico servico = new Servico();
+        servico.setId(c.getLong(c.getColumnIndex("_id_servico")));
+        servico.setNome(c.getString(c.getColumnIndex("nome")));
+        servico.setDescricao(c.getString(c.getColumnIndex("descricao")));
+        return servico;
     }
 
 }

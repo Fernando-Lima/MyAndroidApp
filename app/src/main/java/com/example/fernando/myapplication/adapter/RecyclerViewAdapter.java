@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fernando.myapplication.CadGrupoActivity;
-import com.example.fernando.myapplication.CadServicoActivity;
 import com.example.fernando.myapplication.Model.Servico;
 import com.example.fernando.myapplication.R;
 
@@ -51,6 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 public void onClick(View v) {
                     String codigo = String.valueOf(servico.getId());
                     Intent it  = new Intent(context, CadGrupoActivity.class);
+
                     it.putExtra("id",codigo);
                     context.startActivity(it);
                 }
