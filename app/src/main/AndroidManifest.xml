@@ -28,6 +28,7 @@
         <activity
             android:name=".CadGrupoActivity"
             android:label="@string/title_activity_cad_grupo" />
+        <activity android:name=".NovoServicoActivity"></activity>
     </application>
 
 </manifest>
