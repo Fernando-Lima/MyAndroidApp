@@ -9,23 +9,31 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.fernando.myapplication.DAO.CategoriaDAO;
+import com.example.fernando.myapplication.Model.Categoria;
+import com.example.fernando.myapplication.adapter.SpinnerAdapter;
+
+import java.util.List;
+
 public class NovoServicoActivity extends DebugActivity {
     private Spinner spinner;
-    private EditText edtNome, edtDescricao;
-    private String[] nome = new String[]{"Video","Musica","Curso","Leitura"};
+   // private EditText edtNome, edtDescricao;
+    private CategoriaDAO categoriaDAO;
+    private List<Categoria> categorias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novo_servico);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,nome);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        categoriaDAO = new CategoriaDAO(this);
+        categorias = categoriaDAO.listar();
 
-        edtNome = (EditText) findViewById(R.id.edt_novo_servico_nome);
-        edtDescricao = (EditText) findViewById(R.id.edt_novo_servico_descricao);
-        spinner = (Spinner)findViewById(R.id.spinner_novo_servico);
-        spinner.setAdapter(adapter);
+       /* edtNome = (EditText) findViewById(R.id.edt_novo_servico_nome);
+        edtDescricao = (EditText) findViewById(R.id.edt_novo_servico_descricao);*/
+
+       spinner = (Spinner)findViewById(R.id.spinner_novo_servico);
+       spinner.setAdapter(new SpinnerAdapter(this,categorias));
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -40,4 +48,5 @@ public class NovoServicoActivity extends DebugActivity {
         });
 
     }
+
 }
