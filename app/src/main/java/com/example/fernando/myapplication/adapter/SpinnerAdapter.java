@@ -34,7 +34,9 @@ public class SpinnerAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        Categoria categoria = categorias.get(position);
+        Long posicao = categoria.getId();
+        return posicao;
     }
 
     @Override
