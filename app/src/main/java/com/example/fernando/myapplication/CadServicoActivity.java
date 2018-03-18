@@ -16,8 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fernando.myapplication.DAO.ServicoDAO;
+import com.example.fernando.myapplication.Model.Categoria;
 import com.example.fernando.myapplication.Model.Servico;
 import com.example.fernando.myapplication.adapter.RecyclerViewAdapter;
 
@@ -28,8 +30,7 @@ public class CadServicoActivity extends DebugActivity {
     private ServicoDAO servicoDAO;
     private RecyclerViewAdapter viewAdapter;
     private FloatingActionButton fab;
-    private Spinner spinner;
-    private EditText edtNome, edtDescricao;
+    private LinearLayoutManager linearLayoutManager;
     private String[] nome = new String[]{"Video","Musica","Curso","Leitura"};
 
     @Override
@@ -44,7 +45,7 @@ public class CadServicoActivity extends DebugActivity {
         fab =(FloatingActionButton) findViewById(R.id.fab_cad_servico);
         lstDados = (RecyclerView)findViewById(R.id.acs_recycler_view);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager = new LinearLayoutManager(this);
         lstDados.setLayoutManager(linearLayoutManager);
         List<Servico> servicos = servicoDAO.listar();
         viewAdapter = new RecyclerViewAdapter(servicos,this);
@@ -54,8 +55,14 @@ public class CadServicoActivity extends DebugActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CadServicoActivity.this,NovoServicoActivity.class);
-                startActivity(intent);
+                intent.putExtra("id","");
+                startActivityForResult(intent,1);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        viewAdapter.atualizaLista();
     }
 }

@@ -29,6 +29,8 @@ public class NovoServicoActivity extends DebugActivity {
     private List<Categoria> categorias;
     private SpinnerAdapter spinnerAdapter;
     private Long idSelected;
+    private Intent it;
+    private Long cod;
 
 
     @Override
@@ -47,8 +49,8 @@ public class NovoServicoActivity extends DebugActivity {
         edtDescricao = (EditText) findViewById(R.id.edt_novo_servico_descricao);
         btnSalvar = (Button)findViewById(R.id.btn_novo_servico);
 
-       spinner = (Spinner)findViewById(R.id.spinner_novo_servico);
-       spinner.setAdapter(spinnerAdapter);
+        spinner = (Spinner)findViewById(R.id.spinner_novo_servico);
+        spinner.setAdapter(spinnerAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -58,9 +60,12 @@ public class NovoServicoActivity extends DebugActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
+        it = getIntent();
+        if(!it.getStringExtra("id").equals("")){
+            buscarServico(it.getStringExtra("id"));
+        }
     }
     public void salvarServico(View view){
         if (edtNome.getText().toString().equals("") || edtDescricao.getText().toString().equals("")){
@@ -74,13 +79,24 @@ public class NovoServicoActivity extends DebugActivity {
                 servico.setNome(edtNome.getText().toString());
                 servico.setDescricao(edtDescricao.getText().toString());
                 servico.setCategoria(categoria);
-                servicoDAO.salvar(servico);
-                Toast.makeText(this,"posicao item => "+ spinner.getSelectedItemId()+ " id obeto => " + idSelected , Toast.LENGTH_SHORT).show();
+                if(!it.getStringExtra("id").equals("")){
+                    servico.setId(cod);
+                    servicoDAO.alterar(servico);
+                }else{
+                    servicoDAO.salvar(servico);
+                }
                 finish();
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
     }
-
+    public Servico buscarServico(String codigo){
+        Servico servico = new Servico();
+        servico = servicoDAO.buscarServico(codigo);
+        cod = servico.getId();
+        edtNome.setText(servico.getNome());
+        edtDescricao.setText(servico.getDescricao());
+        return servico;
+    }
 }
