@@ -34,6 +34,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.context = context;
     }
 
+    public void removeItem(){
+        servicoDAO.excluir(String.valueOf(servico.getId()));
+        atualizaLista();
+    }
+    public void atualizaLista(){
+        List<Servico> list = servicoDAO.listar();
+        servicos.clear();
+        servicos.addAll(list);
+        notifyDataSetChanged();
+        Log.i("lista","atualizou a lista");
+    }
+
     @Override
     public RecyclerViewAdapter.ViewHolderServico onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());                                    // referência de uma classe layout inflater
@@ -114,17 +126,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tvDescricao = (TextView)itemView.findViewById(R.id.list_item_servico_tv_descricao);
             tvCategoria = (TextView)itemView.findViewById(R.id.list_item_servico_tv_categoria);
         }
-    }
-
-    public void removeItem(){
-        servicoDAO.excluir(String.valueOf(servico.getId()));
-        atualizaLista();
-    }
-    public void atualizaLista(){
-        List<Servico> list = servicoDAO.listar();
-        servicos.clear();
-        servicos.addAll(list);
-        notifyDataSetChanged();
-        Log.i("lista","atualizou a lista");
     }
 }

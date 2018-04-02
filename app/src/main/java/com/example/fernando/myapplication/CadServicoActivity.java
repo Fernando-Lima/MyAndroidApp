@@ -65,4 +65,5 @@ public class CadServicoActivity extends DebugActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         viewAdapter.atualizaLista();
     }
+
 }
